@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 11 Economics — Full Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1208;
+  --paper: #f7f3ec;
+  --cream: #ede8df;
+  --rule: #c8b89a;
+  --accent: #8b3a0f;
+  --green: #2d5016;
+  --green-light: #e8f0e0;
+  --blue: #0f3460;
+  --blue-light: #dce8f5;
+  --gold: #b8860b;
+  --purple: #4a1a6b;
+  --purple-light: #ede0f5;
+  --red: #8b0000;
+  --red-light: #fceaea;
+
+  /* Highlight colours */
+  --hl-yellow: #fff176;
+  --hl-green: #b9f6ca;
+  --hl-blue: #b3e5fc;
+  --hl-pink: #f8bbd0;
+  --hl-orange: #ffe0b2;
+
+  --sidebar-w: 300px;
+  --topbar-h: 56px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.75;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--topbar-h);
+  background: var(--ink);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+  z-index: 200;
+  border-bottom: 2px solid var(--accent);
+}
+.topbar-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  flex: 1;
+}
+.topbar-title span { color: var(--gold); }
+.topbar-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1.5px solid;
+  cursor: pointer;
+  background: transparent;
+  color: var(--paper);
+  border-color: rgba(255,255,255,0.3);
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.topbar-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
+.topbar-btn.active { background: var(--accent); border-color: var(--accent); }
+
+/* Highlight palette */
+.hl-palette {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.hl-swatch {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+.hl-swatch:hover { transform: scale(1.2); }
+.hl-swatch.active { border-color: white; transform: scale(1.15); }
+.hl-swatch.hl-yellow { background: var(--hl-yellow); }
+.hl-swatch.hl-green  { background: var(--hl-green); }
+.hl-swatch.hl-blue   { background: var(--hl-blue); }
+.hl-swatch.hl-pink   { background: var(--hl-pink); }
+.hl-swatch.hl-orange { background: var(--hl-orange); }
+
+/* ── LAYOUT ── */
+.layout {
+  display: flex;
+  margin-top: var(--topbar-h);
+  min-height: calc(100vh - var(--topbar-h));
+}
+
+/* ── LEFT NAV ── */
+.sidenav {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--ink);
+  color: var(--paper);
+  position: fixed;
+  top: var(--topbar-h);
+  left: 0;
+  bottom: 0;
+  overflow-y: auto;
+  padding: 20px 0 40px;
+  z-index: 100;
+  transition: transform 0.3s;
+}
+.sidenav::-webkit-scrollbar { width: 4px; }
+.sidenav::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+.nav-section {
+  padding: 12px 16px 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  margin-top: 8px;
+}
+.nav-section:first-child { border-top: none; margin-top: 0; }
+.nav-link {
+  display: block;
+  padding: 6px 16px 6px 20px;
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.12s;
+  cursor: pointer;
+}
+.nav-link:hover { color: white; border-left-color: var(--accent); background: rgba(255,255,255,0.04); }
+.nav-link.active { color: white; border-left-color: var(--gold); background: rgba(255,255,255,0.06); }
+
+/* ── MAIN CONTENT ── */
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  padding: 36px 40px 80px;
+  max-width: 900px;
+}
+
+/* ── CHAPTER ── */
+.chapter {
+  margin-bottom: 56px;
+}
+.chapter-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--ink);
+}
+.chapter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  font-weight: 900;
+  color: var(--accent);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.chapter-info { flex: 1; }
+.chapter-topic {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rule);
+  margin-bottom: 2px;
+}
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 32px;
+  scroll-margin-top: 72px;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--blue);
+  border-left: 4px solid var(--blue);
+  padding-left: 12px;
+  margin-bottom: 14px;
+  scroll-margin-top: 72px;
+}
+.subsection-title {
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+/* ── CONTENT ── */
+.content p { margin-bottom: 10px; }
+.content ul, .content ol { padding-left: 22px; margin-bottom: 10px; }
+.content li { margin-bottom: 4px; }
+
+/* ── KEY TERM ── */
+.key-term {
+  font-weight: 600;
+  color: var(--accent);
+}
+.definition {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--accent);
+  padding: 12px 16px;
+  margin: 12px 0;
+  font-size: 14.5px;
+}
+.definition .term {
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── FORMULA BOX ── */
+.formula {
+  background: var(--blue-light);
+  border: 1.5px solid var(--blue);
+  padding: 12px 18px;
+  margin: 12px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13.5px;
+  color: var(--blue);
+  text-align: center;
+}
+.formula .formula-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  display: block;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+/* ── INFO BOX ── */
+.info-box {
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  border-radius: 0;
+}
+.info-box.green { background: var(--green-light); border-left: 4px solid var(--green); }
+.info-box.blue  { background: var(--blue-light);  border-left: 4px solid var(--blue); }
+.info-box.gold  { background: #fdf5dc;             border-left: 4px solid var(--gold); }
+.info-box.red   { background: var(--red-light);    border-left: 4px solid var(--red); }
+.info-box.purple{ background: var(--purple-light); border-left: 4px solid var(--purple); }
+.info-box-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+.info-box.green .info-box-title  { color: var(--green); }
+.info-box.blue  .info-box-title  { color: var(--blue); }
+.info-box.gold  .info-box-title  { color: var(--gold); }
+.info-box.red   .info-box-title  { color: var(--red); }
+.info-box.purple .info-box-title { color: var(--purple); }
+
+/* ── TABLE ── */
+.note-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13.5px;
+}
+.note-table th {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 12px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.note-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+.note-table tr:nth-child(even) td { background: var(--cream); }
+
+/* ── DIVIDER ── */
+hr.rule { border: none; border-top: 1px solid var(--rule); margin: 28px 0; }
+
+/* ── HIGHLIGHTS (applied by JS) ── */
+::selection { background: var(--hl-yellow); }
+.hl-yellow { background: var(--hl-yellow); border-radius: 2px; }
+.hl-green  { background: var(--hl-green);  border-radius: 2px; }
+.hl-blue   { background: var(--hl-blue);   border-radius: 2px; }
+.hl-pink   { background: var(--hl-pink);   border-radius: 2px; }
+.hl-orange { background: var(--hl-orange); border-radius: 2px; }
+
+/* ── RIGHT SIDEBAR — MY NOTES ── */
+.notes-sidebar {
+  position: fixed;
+  top: var(--topbar-h);
+  right: 0;
+  width: var(--sidebar-w);
+  bottom: 0;
+  background: #fffdf7;
+  border-left: 2px solid var(--rule);
+  display: flex;
+  flex-direction: column;
+  z-index: 150;
+  transform: translateX(100%);
+  transition: transform 0.3s;
+}
+.notes-sidebar.open { transform: translateX(0); }
+.notes-sidebar-header {
+  padding: 14px 16px 10px;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--cream);
+}
+.notes-sidebar-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+}
+.notes-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--ink);
+  line-height: 1;
+  padding: 2px 6px;
+}
+.notes-close:hover { color: var(--accent); }
+#myNotesArea {
+  flex: 1;
+  padding: 14px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 13.5px;
+  border: none;
+  outline: none;
+  resize: none;
+  background: transparent;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.notes-sidebar-footer {
+  padding: 10px 14px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  gap: 8px;
+}
+.note-action-btn {
+  flex: 1;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  border: 1.5px solid var(--rule);
+  cursor: pointer;
+  background: transparent;
+  color: var(--ink);
+  transition: all 0.15s;
+}
+.note-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.note-action-btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.note-action-btn.primary:hover { background: #a04010; }
+
+/* Shift content when notes sidebar is open */
+.layout.notes-open .main-content { margin-right: var(--sidebar-w); }
+
+/* ── STICKY PANEL ── */
+.sticky-note {
+  background: var(--hl-yellow);
+  border: 1px solid #e6c800;
+  padding: 10px 14px;
+  margin: 14px 0;
+  font-size: 13.5px;
+  font-style: italic;
+  position: relative;
+}
+.sticky-note::before {
+  content: '📌 EXAM TIP';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #7a6a00;
+  font-style: normal;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── COMPARE TABLE ── */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 14px 0;
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+.compare-grid .col-head {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 8px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.compare-grid .col-cell {
+  padding: 8px 14px;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+.compare-grid .col-cell:nth-child(odd) { background: var(--cream); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .sidenav { transform: translateX(-100%); }
+  .sidenav.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+  .layout.notes-open .main-content { margin-right: 0; }
+  .notes-sidebar { width: 100%; }
+  .topbar-title { font-size: 14px; }
+}
+
+/* ── SEARCH HIGHLIGHT ── */
+.search-hl { background: #ffe066; border-radius: 2px; }
+
+/* ── PROGRESS INDICATOR ── */
+.reading-bar {
+  position: fixed;
+  top: var(--topbar-h);
+  left: 0;
+  height: 3px;
+  background: var(--gold);
+  z-index: 300;
+  width: 0%;
+  transition: width 0.1s;
+}
+</style>
+</head>
+<body>
+
+<!-- READING PROGRESS -->
+<div class="reading-bar" id="readingBar"></div>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <button class="topbar-btn" id="navToggle" onclick="toggleNav()">☰ Menu</button>
+  <div class="topbar-title">Year 11 Economics — <span>Study Notes</span></div>
+
+  <!-- Highlight mode -->
+  <div class="hl-palette" title="Select highlight colour, then select text">
+    <span style="font-family:monospace;font-size:10px;color:rgba(255,255,255,0.5);margin-right:2px;">HIGHLIGHT:</span>
+    <div class="hl-swatch hl-yellow active" onclick="setHL('hl-yellow',this)" title="Yellow"></div>
+    <div class="hl-swatch hl-green"  onclick="setHL('hl-green',this)"  title="Green"></div>
+    <div class="hl-swatch hl-blue"   onclick="setHL('hl-blue',this)"   title="Blue"></div>
+    <div class="hl-swatch hl-pink"   onclick="setHL('hl-pink',this)"   title="Pink"></div>
+    <div class="hl-swatch hl-orange" onclick="setHL('hl-orange',this)" title="Orange"></div>
+    <button class="topbar-btn" onclick="clearHighlights()" title="Clear all highlights">✕ Clear</button>
+  </div>
+
+  <!-- Search -->
+  <input id="searchInput" type="text" placeholder="Search notes…" oninput="searchNotes(this.value)"
+    style="font-family:monospace;font-size:12px;padding:5px 10px;border:1.5px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.08);color:white;outline:none;width:160px;">
+
+  <button class="topbar-btn" id="notesToggle" onclick="toggleNotes()">📝 My Notes</button>
+</div>
+
+<div class="layout" id="layout">
+
+<!-- LEFT NAV -->
+<nav class="sidenav" id="sidenav">
+  <div class="nav-section">Topic 3: Markets</div>
+  <a class="nav-link" onclick="scrollTo('ch6')">Ch 6 · Demand</a>
+  <a class="nav-link" onclick="scrollTo('s6-1')">  6.1 Factors</a>
+  <a class="nav-link" onclick="scrollTo('s6-2')">  6.2 Movements</a>
+  <a class="nav-link" onclick="scrollTo('s6-3')">  6.3 Shifts</a>
+  <a class="nav-link" onclick="scrollTo('s6-4')">  6.4 Price Elasticity</a>
+  <a class="nav-link" onclick="scrollTo('s6-5')">  6.5 Factors of Elasticity</a>
+  <a class="nav-link" onclick="scrollTo('ch7')">Ch 7 · Supply</a>
+  <a class="nav-link" onclick="scrollTo('s7-1')">  7.1 Factors</a>
+  <a class="nav-link" onclick="scrollTo('s7-2')">  7.2 Movements</a>
+  <a class="nav-link" onclick="scrollTo('s7-3')">  7.3 Shifts</a>
+  <a class="nav-link" onclick="scrollTo('s7-4')">  7.4 Price Elasticity</a>
+  <a class="nav-link" onclick="scrollTo('s7-5')">  7.5 Factors of Elasticity</a>
+  <a class="nav-link" onclick="scrollTo('ch8')">Ch 8 · Market Equilibrium</a>
+  <a class="nav-link" onclick="scrollTo('s8-1')">  8.1 Concept</a>
+  <a class="nav-link" onclick="scrollTo('s8-2')">  8.2 Establishing</a>
+  <a class="nav-link" onclick="scrollTo('s8-3')">  8.3 Changes</a>
+  <a class="nav-link" onclick="scrollTo('s8-4')">  8.4 Role of Market</a>
+  <a class="nav-link" onclick="scrollTo('s8-5')">  8.5 Government</a>
+  <a class="nav-link" onclick="scrollTo('s8-6')">  8.6 Competition</a>
+
+  <div class="nav-section">Topic 4: Labour Markets</div>
+  <a class="nav-link" onclick="scrollTo('ch9')">Ch 9 · Labour D &amp; S</a>
+  <a class="nav-link" onclick="scrollTo('s9-1')">  9.1 Demand for Labour</a>
+  <a class="nav-link" onclick="scrollTo('s9-2')">  9.2 Supply of Labour</a>
+  <a class="nav-link" onclick="scrollTo('s9-3')">  9.3 Australian Workforce</a>
+  <a class="nav-link" onclick="scrollTo('s9-4')">  9.4 Labour Equilibrium</a>
+
+  <div class="nav-section">Formulas</div>
+  <a class="nav-link" onclick="scrollTo('formulas')">  All Key Formulas</a>
+  <a class="nav-link" onclick="scrollTo('keyterms')">  Glossary</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<main class="main-content" id="mainContent">
+
+<!-- ═══════════════════════ CHAPTER 6 ═══════════════════════ -->
+<div class="chapter" id="ch6">
+  <div class="chapter-header">
+    <div class="chapter-num">6</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Topic 3 · Markets</div>
+      <div class="chapter-title">Demand</div>
+    </div>
+  </div>
+
+  <div class="definition">
+    <span class="term">Demand (definition)</span>
+    The quantity of a particular good or service that consumers are willing and able to purchase at various price levels at a given point in time.
+  </div>
+
+  <p>A distinction is made between <strong>individual demand</strong> (one consumer's demand) and <strong>market demand</strong> — the demand by all consumers. Market demand = sum of all individual quantities demanded at each price level.</p>
+
+  <div class="section" id="s6-1">
+    <div class="section-title">6.1 Factors Affecting Market Demand</div>
+    <div class="content">
+      <p>The main factors that influence consumer demand (other than price) are:</p>
+
+      <div class="subsection-title">1. The price of other goods and services</div>
+      <ul>
+        <li><strong>Substitutes</strong> — goods that can replace each other (e.g. butter and margarine, Netflix and Disney+). If the price of a substitute rises, demand for the original good increases.</li>
+        <li><strong>Complements</strong> — goods consumed together (e.g. cars and petrol, phones and data plans). If the price of a complement rises, demand for the original good falls.</li>
+      </ul>
+
+      <div class="subsection-title">2. Expected future prices</div>
+      <p>If consumers expect prices to rise in the future (e.g. introduction of a new tax), they buy more now — increasing current demand.</p>
+
+      <div class="subsection-title">3. Changes in consumer tastes and preferences</div>
+      <p>Technological progress can make older goods obsolete (e.g. CDs replaced by streaming). Changing fashion reduces demand for unfashionable goods.</p>
+
+      <div class="subsection-title">4. The level of income</div>
+      <ul>
+        <li><strong>Normal goods</strong> — demand rises as income rises (e.g. luxury cars, dining out).</li>
+        <li><strong>Inferior goods</strong> — demand falls as income rises (e.g. generic brand products).</li>
+        <li><strong>Income distribution</strong> — redistributing income towards higher earners raises demand for luxury goods.</li>
+      </ul>
+
+      <div class="subsection-title">5. The size of the population and age distribution</div>
+      <p>Larger population → greater total demand. Ageing population (like Australia's) shifts demand towards healthcare, retirement villages, and aged care.</p>
+
+      <div class="info-box gold">
+        <span class="info-box-title">Network Externalities</span>
+        <strong>Bandwagon effect (positive):</strong> Demand rises because everyone else has the good (e.g. mobile phones).<br>
+        <strong>Snob effect (negative):</strong> Demand falls as more people own the good (e.g. rare artworks, limited-edition cars).
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s6-2">
+    <div class="section-title">6.2 Movements Along the Demand Curve</div>
+    <div class="content">
+      <p>A change in the <strong>price of the good itself</strong> causes a movement along the demand curve (not a shift). This is called:</p>
+      <ul>
+        <li><strong>Expansion (extension) of demand</strong> — price falls → quantity demanded rises (move down-right along curve)</li>
+        <li><strong>Contraction of demand</strong> — price rises → quantity demanded falls (move up-left along curve)</li>
+      </ul>
+      <p>The <strong>law of demand</strong> states: as price increases, quantity demanded decreases (inverse relationship), assuming all other factors are constant (<em>ceteris paribus</em>).</p>
+      <div class="sticky-note">Remember: movement ALONG the curve = price change only. A SHIFT of the curve = any other factor (income, tastes, etc.).</div>
+    </div>
+  </div>
+
+  <div class="section" id="s6-3">
+    <div class="section-title">6.3 Shifts of the Demand Curve</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Causes an INCREASE in demand (shift right →)</th><th>Causes a DECREASE in demand (shift left ←)</th></tr></thead>
+        <tbody>
+          <tr><td>Rise in price of a substitute good</td><td>Fall in price of a substitute good</td></tr>
+          <tr><td>Fall in price of a complementary good</td><td>Rise in price of a complementary good</td></tr>
+          <tr><td>Rise in consumer income (normal goods)</td><td>Fall in consumer income (normal goods)</td></tr>
+          <tr><td>Expected future price rise</td><td>Expected future price decline</td></tr>
+          <tr><td>Favourable change in tastes/preferences</td><td>Unfavourable change in tastes (e.g. tech making good obsolete)</td></tr>
+          <tr><td>Population increase</td><td>Population decrease</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="s6-4">
+    <div class="section-title">6.4 Price Elasticity of Demand (PED)</div>
+    <div class="content">
+      <div class="definition">
+        <span class="term">Price Elasticity of Demand</span>
+        Measures the responsiveness (sensitivity) of quantity demanded to a change in price. Calculated as the percentage change in quantity demanded divided by the percentage change in price.
+      </div>
+      <div class="formula">
+        <span class="formula-label">Price Elasticity of Demand</span>
+        PED = % change in quantity demanded ÷ % change in price
+      </div>
+      <table class="note-table">
+        <thead><tr><th>Type</th><th>PED value</th><th>Description</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Relatively elastic</strong></td><td>PED &gt; 1</td><td>Strong response — % Δ qty &gt; % Δ price</td><td>Luxury cars, overseas holidays</td></tr>
+          <tr><td><strong>Relatively inelastic</strong></td><td>PED &lt; 1</td><td>Weak response — % Δ qty &lt; % Δ price</td><td>Petrol, cigarettes, insulin</td></tr>
+          <tr><td><strong>Unit elastic</strong></td><td>PED = 1</td><td>Equal response — % Δ qty = % Δ price; total outlay unchanged</td><td>Theoretical mid-point</td></tr>
+          <tr><td><strong>Perfectly elastic</strong></td><td>PED = ∞</td><td>Horizontal demand curve — any price rise kills demand entirely</td><td>Individual seller in pure competition</td></tr>
+          <tr><td><strong>Perfectly inelastic</strong></td><td>PED = 0</td><td>Vertical demand curve — quantity doesn't change regardless of price</td><td>Life-saving medication (theoretical)</td></tr>
+        </tbody>
+      </table>
+
+      <div class="subsection-title">Total Outlay Method</div>
+      <p>A simple way to determine elasticity by observing what happens to total revenue (price × quantity) when price changes:</p>
+      <div class="info-box blue">
+        <span class="info-box-title">Total Outlay Rule</span>
+        Price ↑ and Revenue ↑ → <strong>Inelastic</strong> demand<br>
+        Price ↑ and Revenue ↓ → <strong>Elastic</strong> demand<br>
+        Price ↑ and Revenue unchanged → <strong>Unit elastic</strong>
+      </div>
+
+      <div class="subsection-title">Why PED Matters</div>
+      <ul>
+        <li><strong>Business firms:</strong> Use PED to set optimal pricing. Elastic demand → lower price raises revenue. Inelastic demand → higher price raises revenue.</li>
+        <li><strong>Government:</strong> Imposes excise taxes on inelastic goods (tobacco, alcohol, petrol) to raise reliable revenue with little drop in quantity purchased. Also uses PED to predict effects of indirect taxes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s6-5">
+    <div class="section-title">6.5 Factors Affecting Elasticity of Demand</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Factor</th><th>Makes demand MORE elastic</th><th>Makes demand MORE inelastic</th></tr></thead>
+        <tbody>
+          <tr><td>Close substitutes</td><td>Many substitutes available</td><td>Few or no close substitutes</td></tr>
+          <tr><td>Luxury vs necessity</td><td>Luxury item</td><td>Necessity / daily essential</td></tr>
+          <tr><td>Proportion of income</td><td>Large share of income</td><td>Small share of income (e.g. cheap pens)</td></tr>
+          <tr><td>Time since price change</td><td>Longer time → can find substitutes</td><td>Immediately after price change</td></tr>
+          <tr><td>Habit-forming / addictive</td><td>Not addictive</td><td>Addictive (e.g. cigarettes, alcohol)</td></tr>
+          <tr><td>Durable vs non-durable</td><td>Durable — can delay purchase</td><td>Non-durable — must be bought soon</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════ CHAPTER 7 ═══════════════════════ -->
+<div class="chapter" id="ch7">
+  <div class="chapter-header">
+    <div class="chapter-num">7</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Topic 3 · Markets</div>
+      <div class="chapter-title">Supply</div>
+    </div>
+  </div>
+
+  <div class="definition">
+    <span class="term">Supply (definition)</span>
+    The quantity of a good or service that all firms in an industry are willing and able to offer for sale at different price levels, at a given point in time. Market supply = sum of all individual firm supplies.
+  </div>
+
+  <div class="section" id="s7-1">
+    <div class="section-title">7.1 Factors Affecting Market Supply</div>
+    <div class="content">
+      <div class="subsection-title">1. The price of the good itself</div>
+      <p>Higher price → more profitable to produce → supply increases. This drives the upward-sloping supply curve (law of supply).</p>
+
+      <div class="subsection-title">2. The price of other goods or services</div>
+      <p>If a substitute in production becomes more profitable (e.g. yoghurt price rises), producers shift resources away from producing cheese → cheese supply falls.</p>
+
+      <div class="subsection-title">3. Expected future prices</div>
+      <p>If producers expect a future price rise, they may withhold supply now to sell at higher prices later (works mainly for storable goods).</p>
+
+      <div class="subsection-title">4. The state of technology</div>
+      <p>Better technology lowers production costs and allows more to be produced at any given price → supply increases. Example: 3D printing has expanded supply of hearing aids.</p>
+
+      <div class="subsection-title">5. Changes in the cost of factors of production</div>
+      <p>A fall in factor costs (wages, raw materials, energy) reduces production costs → supply increases. A rise in factor costs → supply decreases.</p>
+
+      <div class="subsection-title">6. The quantity of the good available / number of suppliers</div>
+      <p>More suppliers in the industry → greater market supply. Natural limits (e.g. iridium reserves) constrain supply of rare goods.</p>
+
+      <div class="subsection-title">7. Climatic and seasonal influences</div>
+      <p>Drought, floods, or extreme weather reduce agricultural supply. Seasonal conditions affect when and how much can be produced.</p>
+
+      <div class="subsection-title">8. Government regulation</div>
+      <p>Tougher safety regulations or licencing requirements can restrict supply by raising compliance costs.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7-2">
+    <div class="section-title">7.2 Movements Along the Supply Curve</div>
+    <div class="content">
+      <p>A change in the <strong>price of the good itself</strong> causes movement along the supply curve:</p>
+      <ul>
+        <li><strong>Expansion of supply</strong> — price rises → quantity supplied rises (move up-right)</li>
+        <li><strong>Contraction of supply</strong> — price falls → quantity supplied falls (move down-left)</li>
+      </ul>
+      <p>The <strong>law of supply</strong>: as price increases, quantity supplied increases (positive relationship), ceteris paribus.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s7-3">
+    <div class="section-title">7.3 Shifts of the Supply Curve</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Causes an INCREASE in supply (shift right →)</th><th>Causes a DECREASE in supply (shift left ←)</th></tr></thead>
+        <tbody>
+          <tr><td>Fall in cost of production (wages, inputs)</td><td>Rise in cost of production</td></tr>
+          <tr><td>Technological improvement</td><td>Adverse weather / natural disaster</td></tr>
+          <tr><td>More producers enter the market</td><td>Producers leave the market</td></tr>
+          <tr><td>Favourable government policy / deregulation</td><td>Tougher government regulation</td></tr>
+          <tr><td>Expected future price decline (sell now)</td><td>Expected future price rise (withhold)</td></tr>
+          <tr><td>Fall in price of substitute in production</td><td>Rise in price of substitute in production</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="s7-4">
+    <div class="section-title">7.4 Price Elasticity of Supply (PES)</div>
+    <div class="content">
+      <div class="definition">
+        <span class="term">Price Elasticity of Supply</span>
+        Measures the responsiveness of quantity supplied to a change in price. Calculated as the percentage change in quantity supplied divided by the percentage change in price.
+      </div>
+      <div class="formula">
+        <span class="formula-label">Price Elasticity of Supply</span>
+        PES = % change in quantity supplied ÷ % change in price
+      </div>
+      <table class="note-table">
+        <thead><tr><th>Type</th><th>PES</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Relatively elastic supply</td><td>&gt; 1</td><td>% Δ qty supplied &gt; % Δ price — producers can respond quickly</td></tr>
+          <tr><td>Relatively inelastic supply</td><td>&lt; 1</td><td>% Δ qty supplied &lt; % Δ price — hard to change production quickly</td></tr>
+          <tr><td>Unit elastic</td><td>= 1</td><td>Equal percentage changes</td></tr>
+          <tr><td>Perfectly elastic</td><td>= ∞</td><td>Horizontal supply curve — producers supply any amount at one price</td></tr>
+          <tr><td>Perfectly inelastic</td><td>= 0</td><td>Vertical supply curve — quantity fixed regardless of price (e.g. original artworks)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section" id="s7-5">
+    <div class="section-title">7.5 Factors Affecting Elasticity of Supply</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Factor</th><th>Effect</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Time lags after a price change</strong></td><td>Short run → inelastic (cannot change inputs quickly). Long run → more elastic (can expand capacity, build new facilities, train workers).</td></tr>
+          <tr><td><strong>Ability to hold and store stock</strong></td><td>Goods that can be stored have more elastic supply (can release from inventory). Perishables (fresh fruit, vegetables) are more inelastic.</td></tr>
+          <tr><td><strong>Excess capacity</strong></td><td>Firms with spare capacity can respond quickly → more elastic supply. Firms at full capacity → more inelastic.</td></tr>
+          <tr><td><strong>Ease of substituting labour and capital</strong></td><td>If labour and capital can be easily switched between uses, supply is more elastic.</td></tr>
+        </tbody>
+      </table>
+      <div class="sticky-note">Short run vs long run is a common exam distinction. In the short run, supply is usually relatively inelastic because producers cannot adjust fixed inputs (factories, equipment). In the long run, all inputs are variable and supply becomes more elastic.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════ CHAPTER 8 ═══════════════════════ -->
+<div class="chapter" id="ch8">
+  <div class="chapter-header">
+    <div class="chapter-num">8</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Topic 3 · Markets</div>
+      <div class="chapter-title">Market Equilibrium</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8-1">
+    <div class="section-title">8.1 The Concept of Market Equilibrium</div>
+    <div class="content">
+      <div class="definition">
+        <span class="term">Market Equilibrium</span>
+        The situation where, at a certain price level, the quantity supplied and the quantity demanded of a particular good are equal. The market clears — there is no excess demand or excess supply — and there is no tendency for price to change.
+      </div>
+      <div class="definition">
+        <span class="term">Price Mechanism</span>
+        The process by which the forces of supply and demand interact to determine the market price at which goods and services will be bought and sold, and the quantity produced.
+      </div>
+      <p>The analysis assumes <strong>pure competition</strong> — many buyers and sellers, no single participant has the power to influence market outcomes.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8-2">
+    <div class="section-title">8.2 Establishing Market Equilibrium</div>
+    <div class="content">
+      <p>Equilibrium is found at the intersection of the demand (D) and supply (S) curves, giving the equilibrium price (P<sub>E</sub>) and equilibrium quantity (Q<sub>E</sub>).</p>
+
+      <div class="info-box blue">
+        <span class="info-box-title">Adjustment Mechanism</span>
+        <strong>If price &gt; equilibrium (excess supply):</strong> Quantity supplied &gt; quantity demanded. Sellers compete to sell → price falls → expansion of demand + contraction of supply → market returns to equilibrium.<br><br>
+        <strong>If price &lt; equilibrium (excess demand):</strong> Quantity demanded &gt; quantity supplied. Buyers compete to buy → price rises → contraction of demand + expansion of supply → market returns to equilibrium.
+      </div>
+
+      <div class="info-box green">
+        <span class="info-box-title">Market Equilibrium Occurs When:</span>
+        1. Quantity demanded = quantity supplied<br>
+        2. The market clears (no surplus or shortage)<br>
+        3. There is no tendency for price or quantity to change
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s8-3">
+    <div class="section-title">8.3 Changes in Equilibrium</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Event</th><th>Effect on Curve</th><th>New P<sub>E</sub></th><th>New Q<sub>E</sub></th></tr></thead>
+        <tbody>
+          <tr><td>Increase in demand</td><td>D shifts right →</td><td>Rises</td><td>Rises</td></tr>
+          <tr><td>Decrease in demand</td><td>D shifts left ←</td><td>Falls</td><td>Falls</td></tr>
+          <tr><td>Increase in supply</td><td>S shifts right →</td><td>Falls</td><td>Rises</td></tr>
+          <tr><td>Decrease in supply</td><td>S shifts left ←</td><td>Rises</td><td>Falls</td></tr>
+          <tr><td>D increases + S increases</td><td>Both shift right</td><td>Uncertain (depends on magnitude)</td><td>Rises</td></tr>
+          <tr><td>D decreases + S decreases</td><td>Both shift left</td><td>Uncertain</td><td>Falls</td></tr>
+        </tbody>
+      </table>
+      <div class="sticky-note">When drawing diagrams: label axes (Price $, Quantity), label curves (D, S, D₁, S₁), show original and new equilibrium (P<sub>E1</sub>, Q<sub>E1</sub>), and use arrows to show the direction of the shift.</div>
+    </div>
+  </div>
+
+  <div class="section" id="s8-4">
+    <div class="section-title">8.4 The Role of the Market</div>
+    <div class="content">
+      <p>The price mechanism solves the economic problem (what, how, and for whom to produce) through:</p>
+      <ul>
+        <li><strong>Product markets</strong> — goods and services. D curve = consumer wants; S curve = production limits. Equilibrium price satisfies both.</li>
+        <li><strong>Factor markets</strong> — inputs (land, labour, capital, enterprise). D and S of factor inputs determines the price (wage, rent, profit) received by resource owners.</li>
+      </ul>
+
+      <div class="definition">
+        <span class="term">Allocative Efficiency</span>
+        The economy's ability to allocate resources to satisfy consumer wants. Achieved when production continues until the value consumers place on the last unit equals the cost of producing it. Price mechanism ensures allocative efficiency by sending signals to producers and consumers.
+      </div>
+
+      <p>Competition ensures firms are responsive to consumer demand and produce at minimum cost (productive efficiency).</p>
+    </div>
+  </div>
+
+  <div class="section" id="s8-5">
+    <div class="section-title">8.5 Government Intervention in the Marketplace</div>
+    <div class="content">
+      <div class="definition">
+        <span class="term">Market Failure</span>
+        Occurs when the price mechanism fails to take into account all the social costs and benefits of production and consumption, resulting in a socially suboptimal outcome (too much or too little produced).
+      </div>
+
+      <div class="subsection-title">Price Intervention</div>
+      <ul>
+        <li><strong>Price ceiling (maximum price)</strong> — set below equilibrium price. Prevents price rising above this level. Creates excess demand (shortage). Example: government caps on public transport fares or rent controls.</li>
+        <li><strong>Price floor (minimum price)</strong> — set above equilibrium price. Prevents price falling below this level. Creates excess supply (surplus). Example: minimum wage in the labour market.</li>
+      </ul>
+
+      <div class="info-box red">
+        <span class="info-box-title">⚠ Both price ceilings and floors cause market disequilibrium</span>
+        Price ceiling → shortage (Q<sub>D</sub> &gt; Q<sub>S</sub>)<br>
+        Price floor → surplus (Q<sub>S</sub> &gt; Q<sub>D</sub>)
+      </div>
+
+      <div class="subsection-title">Quantity Intervention — Externalities</div>
+      <div class="definition">
+        <span class="term">Externality</span>
+        A cost or benefit that affects parties other than the buyer and seller involved in a transaction — a side-effect not captured by the price mechanism.
+      </div>
+      <ul>
+        <li><strong>Negative externality</strong> — a cost borne by society (e.g. pollution from industry). Social cost &gt; private cost → market overproduces. Government response: tax (e.g. carbon tax), regulations, quantity limits.</li>
+        <li><strong>Positive externality</strong> — a benefit enjoyed by society (e.g. education, public parks). Social benefit &gt; private benefit → market underproduces. Government response: subsidies to producers or consumers.</li>
+      </ul>
+
+      <table class="note-table">
+        <thead><tr><th>Problem</th><th>Government Action</th><th>Outcome</th></tr></thead>
+        <tbody>
+          <tr><td>Market price too high</td><td>Price ceiling</td><td>Reduces price; creates shortage (disequilibrium)</td></tr>
+          <tr><td>Market price too low</td><td>Price floor</td><td>Increases price; creates excess (disequilibrium)</td></tr>
+          <tr><td>Market quantity too high (neg. externality)</td><td>Tax</td><td>Raises equilibrium price, reduces quantity</td></tr>
+          <tr><td>Market quantity too low (pos. externality)</td><td>Subsidy</td><td>Lowers equilibrium price, increases quantity</td></tr>
+          <tr><td>Market fails to provide good (public good)</td><td>Government provides it</td><td>Funded by tax revenue</td></tr>
+        </tbody>
+      </table>
+
+      <div class="definition">
+        <span class="term">Merit Goods</span>
+        Goods not produced in sufficient quantity by private markets because individuals do not fully value the external benefits (e.g. healthcare, education). Government subsidises these.
+      </div>
+      <div class="definition">
+        <span class="term">Public Goods</span>
+        Goods that private firms are unwilling to supply because they are non-excludable and non-rival in consumption (benefits can't be restricted to paying consumers). Example: national defence, public roads, street lighting. Government must provide these.
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="s8-6">
+    <div class="section-title">8.6 Competition and Market Power</div>
+    <div class="content">
+      <table class="note-table">
+        <thead><tr><th>Market Structure</th><th>Key Characteristics</th><th>Price Setting</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Pure competition</strong></td><td>Many buyers &amp; sellers; homogeneous product; no barriers to entry; no market power; theoretical</td><td>Price taker — accepts market price</td></tr>
+          <tr><td><strong>Monopolistic competition</strong></td><td>Many small firms; differentiated products; some barriers to entry; brand loyalty</td><td>Some price-setting power via differentiation</td></tr>
+          <tr><td><strong>Oligopoly</strong></td><td>Few large dominant firms; significant barriers to entry; interdependent pricing</td><td>Significant price-setting power</td></tr>
+          <tr><td><strong>Monopoly</strong></td><td>One seller; no substitutes; high barriers; no competition</td><td>Price setter — controls market price</td></tr>
+        </tbody>
+      </table>
+
+      <p>As competition decreases, prices tend to rise and output falls relative to pure competition. Greater market power → higher equilibrium price and lower equilibrium quantity than under pure competition.</p>
+
+      <div class="info-box purple">
+        <span class="info-box-title">Monopoly Characteristics</span>
+        Only one firm selling the product. No close substitutes. Significant barriers to entry. The monopolist is a <strong>price setter</strong> and can restrict output to maximise profit. In Australia, water supply is an example of a natural monopoly.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════ CHAPTER 9 ═══════════════════════ -->
+<div class="chapter" id="ch9">
+  <div class="chapter-header">
+    <div class="chapter-num">9</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Topic 4 · Labour Markets</div>
+      <div class="chapter-title">Labour Demand and Supply</div>
+    </div>
+  </div>
+
+  <div class="definition">
+    <span class="term">Labour Market</span>
+    Where individuals seeking employment interact with employers who want to obtain the most appropriate labour skills for the production process. The price of labour is the wage/salary.
+  </div>
+
+  <p>In reality, there are many distinct labour markets (by occupation, industry, region). For simplicity, economists refer to "the labour market" as if it were one.</p>
+
+  <div class="section" id="s9-1">
+    <div class="section-title">9.1 The Demand for Labour</div>
+    <div class="content">
+      <div class="definition">
+        <span class="term">Derived Demand</span>
+        Labour demand is a derived demand — firms demand labour not for its own sake, but because it is needed to produce goods and services that consumers want. If demand for output rises, demand for labour rises.
+      </div>
+      <p>Like other demand curves, the labour demand curve slopes downward — as wages fall, firms employ more labour.</p>
+
+      <div class="subsection-title">Factors Affecting Labour Demand</div>
+
+      <div class="subsection-title">Output factors (affecting how much a firm produces)</div>
+      <ul>
+        <li><strong>The output of the firm / general economic conditions (aggregate demand):</strong> The single most important factor. Strong economic growth → higher sales → firms hire more workers. Recessions cause firms to reduce staff.</li>
+        <li><strong>The demand for an individual firm's products:</strong> Even in a declining industry, a firm increasing its market share will demand more labour. Influenced by product quality, marketing, reputation.</li>
+        <li><strong>Conditions in the firm's industry:</strong> Changes in consumer preferences, industry regulation, and barriers to entry affect whole-industry labour demand. E.g. Australia's ageing population has boosted demand for aged care and health workers.</li>
+      </ul>
+
+      <div class="subsection-title">Output factors (affecting how labour is used to produce)</div>
+      <ul>
+        <li><strong>The productivity of labour:</strong> Labour productivity = output per unit of labour per unit of time. Higher productivity means fewer workers needed for the same output (short-run effect). But if aggregate demand is rising faster than productivity gains, demand for labour still rises.</li>
+        <li><strong>The cost of labour versus other inputs (capital):</strong> Firms compare the cost of labour with capital (machinery). If wages rise relative to capital costs (interest rates), firms substitute capital for labour → labour demand falls. Labour demand is more elastic when:
+          <ul>
+            <li>It is easy to substitute between labour and capital</li>
+            <li>Labour costs are a large proportion of total costs</li>
+            <li>It is easy to pass on higher costs to consumers</li>
+          </ul>
+        </li>
+        <li><strong>Cost of foreign labour:</strong> If offshore labour is cheaper (e.g. manufacturers moving to China or India), domestic labour demand falls. Example: Australian call centres shifting to the Philippines.</li>
+      </ul>
+
+      <div class="info-box green">
+        <span class="info-box-title">Summary: Factors Influencing Labour Demand</span>
+        <strong>Output factors:</strong> General economic conditions · Firm's individual product demand · Industry conditions<br>
+        <strong>Input use factors:</strong> Productivity of labour · Cost of labour vs capital · Cost of foreign labour
+      </div>
+
+      <div class="subsection-title">Labour Productivity</div>
+      <div class="formula">
+        <span class="formula-label">Labour Productivity</span>
+        Labour Productivity = Total Output ÷ Labour Input
+      </div>
+      <p>Labour productivity depends on: education and skills, health and motivation, technology, and how efficiently labour is combined with other inputs.</p>
+    </div>
+  </div>
+
+  <div class="section" id="s9-2">
+    <div class="section-title">9.2 The Supply of Labour</div>
+    <div class="content">
+      <p>Labour supply slopes upward — as wages rise, more individuals are willing to supply labour. Unlike product markets, individuals (workers) supply labour; firms demand it.</p>
+
+      <div class="subsection-title">Factors Affecting Labour Supply</div>
+
+      <div class="subsection-title">1. Pay levels (wages)</div>
+      <p>Higher wage → more people willing to sacrifice leisure to work. Non-wage incentives (bonuses, superannuation, flexible hours) also influence supply to a particular firm or industry.</p>
+
+      <div class="subsection-title">2. Working conditions</div>
+      <p>Attractive conditions (flexibility, remote work options, pleasant environment) attract more workers. Since 2024, Australian workers have a legal "right to disconnect" from work outside hours. 36% of Australians regularly worked from home in 2024 post-COVID.</p>
+
+      <div class="subsection-title">3. Education, skills and experience requirements (Human Capital)</div>
+      <div class="definition">
+        <span class="term">Human Capital</span>
+        The total sum of knowledge, skills, training, and experience of workers that contributes to the production process. It is the "quality" of the labour force and the main influence on productivity growth.
+      </div>
+      <p>Labour supply is limited by the availability of human capital. Jobs requiring advanced skills (e.g. medical specialists) have inelastic supply — takes years to train.</p>
+
+      <div class="subsection-title">4. The mobility of labour</div>
+      <ul>
+        <li><strong>Occupational mobility</strong> — ability to move between different occupations. Higher for low-skill jobs; lower for highly specialised professions.</li>
+        <li><strong>Geographical mobility</strong> — ability to move between locations. Limited by relocation costs, family ties, regional opportunities. Remote working has reduced geographic barriers significantly.</li>
+      </ul>
+
+      <div class="subsection-title">5. Immigration policies</div>
+      <p>Australia's immigration system prioritises skilled workers (70%+ of adult immigrants enter on skills basis). Immigration expands labour supply. Over 1 million net overseas arrivals in the 2 years to March 2024 (an all-time high). As of 2025, cuts of 140,000/year planned.</p>
+
+      <div class="subsection-title">6. Other factors</div>
+      <ul>
+        <li>Professional associations (e.g. Law Society, AMA) set standards that restrict labour supply to certain occupations.</li>
+        <li>Government licencing and qualification requirements can limit supply (e.g. builder's licence).</li>
+        <li>Participation rate — proportion of working-age population in the workforce.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s9-3">
+    <div class="section-title">9.3 The Australian Workforce — Key Definitions &amp; Calculations</div>
+    <div class="content">
+      <div class="info-box gold">
+        <span class="info-box-title">⭐ This section is calculation-heavy — must know all 4 formulas</span>
+        Unemployment rate, labour force, participation rate, and working-age population calculations are all assessed.
+      </div>
+
+      <div class="definition">
+        <span class="term">Workforce / Labour Force</span>
+        The number of people 15 years of age and above who are either working or actively seeking work. Includes: employed persons + unemployed persons.
+      </div>
+
+      <div class="definition">
+        <span class="term">Working-Age Population</span>
+        The number of people in an economy who are at least age 15 (the working age). Technically defined as people between 15 and 64 in some contexts, but in Australia the ABS includes all aged 15 and over as potential workforce participants.
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">Labour Force (Workforce)</span>
+        Labour Force = Employed + Unemployed
+      </div>
+
+      <div class="definition">
+        <span class="term">Employed</span>
+        A person is employed if they work at least one hour per week. Includes: full-time workers, part-time workers, those on paid leave, strike, or workers' compensation.
+      </div>
+
+      <div class="definition">
+        <span class="term">Unemployed</span>
+        A person is unemployed if they are: (1) currently available for work, AND (2) actively seeking work, but have not yet found it. Must satisfy BOTH conditions.
+      </div>
+
+      <div class="definition">
+        <span class="term">Not in the Labour Force</span>
+        People of working age who are neither employed nor actively seeking work. Includes: retired people, full-time students, people performing domestic duties, discouraged workers (those who have given up looking).
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">Unemployment Rate</span>
+        Unemployment Rate (%) = (Number Unemployed ÷ Labour Force) × 100
+      </div>
+
+      <div class="formula">
+        <span class="formula-label">Labour Force Participation Rate</span>
+        Participation Rate (%) = (Labour Force ÷ Working-Age Population [15+]) × 100
+      </div>
+
+      <div class="sticky-note">Discouraged workers are NOT counted as unemployed — they're "not in the labour force." This means the official unemployment rate can understate the true extent of unemployment.</div>
+
+      <div class="subsection-title">Population Size and Growth</div>
+      <p>Australia's population is approx. 26.5 million (2024). Population growth comes from two sources:</p>
+      <ul>
+        <li><strong>Natural increase</strong> — excess of births over deaths in a year. Rate has declined (below 0.6% in early 2020s) due to fewer children per family.</li>
+        <li><strong>Net migration</strong> — excess of permanent arrivals over departures. Accounts for ~40% of Australia's population growth. Record net migration of 1 million in 2 years post-COVID.</li>
+      </ul>
+
+      <div class="subsection-title">Age Distribution</div>
+      <p>Australia's population is ageing — proportion aged 65+ is growing, while 15–64 share is declining. Median age rose from 32 (1991) to 38 (2024); projected to reach 43.1 by 2062–63. This creates long-term pressure on the labour force size and aged care demand.</p>
+
+      <div class="subsection-title">Labour Force Participation Rate — Key Trends</div>
+      <table class="note-table">
+        <thead><tr><th>Year</th><th>Males (%)</th><th>Females (%)</th><th>All Persons (%)</th></tr></thead>
+        <tbody>
+          <tr><td>1969–70</td><td>83.2</td><td>39.1</td><td>61.0</td></tr>
+          <tr><td>1999–00</td><td>72.1</td><td>54.1</td><td>62.9</td></tr>
+          <tr><td>2014–15</td><td>71.0</td><td>58.7</td><td>64.7</td></tr>
+          <tr><td>2024–25</td><td>70.9</td><td>63.2</td><td>67.0 (record)</td></tr>
+        </tbody>
+      </table>
+      <p>Key trends: male participation has declined significantly. Female participation has risen dramatically — from 39% in 1969 to a record 63.2% in 2025. Overall rate is at a record high of 67%.</p>
+
+      <div class="subsection-title">Factors affecting participation rate:</div>
+      <ul>
+        <li><strong>State of the economy (pro-cyclical):</strong> Boom → higher participation (more jobs available). Recession → lower participation (discouraged workers give up).</li>
+        <li><strong>Ageing population:</strong> Long-term decline expected as older cohorts retire. Government has raised pension age to 67 (2023) to counteract this.</li>
+        <li><strong>Female participation:</strong> Rising due to changing social attitudes, childcare availability, and lower fertility rates.</li>
+        <li><strong>School retention rates:</strong> More young people staying in education reduces short-run participation rate.</li>
+        <li><strong>Immigration:</strong> Skills-based immigration increases participation rate.</li>
+      </ul>
+
+      <div class="subsection-title">Quality of the Workforce — Education</div>
+      <ul>
+        <li>Higher education = higher earnings. Postgraduate degree holders earn ~2× as much as Year 12 only.</li>
+        <li>Across OECD (2023), unemployment among those without secondary completion was ~6 percentage points higher than tertiary completers.</li>
+        <li>86.2% of 20–24 year olds had completed Year 12 in 2024.</li>
+        <li>Australia's education spending is slightly above OECD average; ~1/3 of education expenditure is privately funded (one of the largest shares in OECD).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section" id="s9-4">
+    <div class="section-title">9.4 Extension: Labour Market Equilibrium</div>
+    <div class="content">
+      <div class="info-box blue">
+        <span class="info-box-title">Note: Extension Content</span>
+        This section goes beyond the syllabus minimum but helps understand how the labour market fits with other markets. It is useful context for extended responses.
+      </div>
+      <p>Applying standard supply and demand to the labour market:</p>
+      <ul>
+        <li><strong>Supply curve</strong> slopes upward — higher wages attract more workers willing to supply labour. Note: labour supply can be backward-bending at very high wages (workers choose leisure over more income).</li>
+        <li><strong>Demand curve</strong> slopes downward — at lower wages, firms employ more workers (law of diminishing marginal returns).</li>
+        <li><strong>Equilibrium</strong> — achieved at the intersection of labour supply and demand. W<sub>E</sub> = equilibrium wage; Q<sub>E</sub> = equilibrium employment level.</li>
+      </ul>
+      <div class="info-box green">
+        <span class="info-box-title">Changes in Labour Market Equilibrium</span>
+        <strong>Increase in labour demand (D shifts right):</strong> → wage rises, employment rises<br>
+        <strong>Decrease in labour demand (D shifts left):</strong> → wage falls, employment falls<br>
+        <strong>People choose more leisure (S shifts left):</strong> → wage rises, employment falls<br>
+        <strong>Immigration increases supply (S shifts right):</strong> → wage may fall, employment rises
+      </div>
+      <p>In reality, the labour market does NOT function as a perfectly competitive market — institutions (trade unions, minimum wages, awards) mean the wage rate is not solely determined by free market forces.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════ FORMULAS PAGE ═══════════════════════ -->
+<div class="chapter" id="formulas">
+  <div class="chapter-header">
+    <div class="chapter-num" style="font-size:28px;">∑</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Quick Reference</div>
+      <div class="chapter-title">All Key Formulas</div>
+    </div>
+  </div>
+
+  <div class="formula"><span class="formula-label">Price Elasticity of Demand (PED)</span>
+PED = % change in quantity demanded ÷ % change in price</div>
+
+  <div class="formula"><span class="formula-label">Price Elasticity of Supply (PES)</span>
+PES = % change in quantity supplied ÷ % change in price</div>
+
+  <div class="formula"><span class="formula-label">Labour Force / Workforce</span>
+Labour Force = Number Employed + Number Unemployed</div>
+
+  <div class="formula"><span class="formula-label">Unemployment Rate</span>
+Unemployment Rate (%) = (Unemployed ÷ Labour Force) × 100</div>
+
+  <div class="formula"><span class="formula-label">Labour Force Participation Rate</span>
+Participation Rate (%) = (Labour Force ÷ Working-Age Population [aged 15+]) × 100</div>
+
+  <div class="formula"><span class="formula-label">Labour Productivity</span>
+Labour Productivity = Total Output ÷ Labour Input (hours worked)</div>
+
+  <div class="formula"><span class="formula-label">Total Outlay (for measuring PED)</span>
+Total Outlay = Price × Quantity Demanded</div>
+
+  <div class="info-box gold" style="margin-top:20px;">
+    <span class="info-box-title">Calculation Tips</span>
+    <ul style="padding-left:18px;">
+      <li>Always show your working — partial marks are available even for wrong answers.</li>
+      <li>Express unemployment and participation rates as percentages to 1 decimal place unless told otherwise.</li>
+      <li>Working-age population = everyone aged 15 and over (ABS definition for Australia).</li>
+      <li>Labour force does NOT include people not looking for work (discouraged workers, retirees, full-time students, carers).</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- ═══════════════════════ GLOSSARY ═══════════════════════ -->
+<div class="chapter" id="keyterms">
+  <div class="chapter-header">
+    <div class="chapter-num" style="font-size:28px;">A–Z</div>
+    <div class="chapter-info">
+      <div class="chapter-topic">Quick Reference</div>
+      <div class="chapter-title">Key Terms Glossary</div>
+    </div>
+  </div>
+
+  <table class="note-table">
+    <thead><tr><th style="width:200px;">Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Aggregate demand</strong></td><td>Total demand for goods and services in an economy (C + I + G + X–M).</td></tr>
+      <tr><td><strong>Allocative efficiency</strong></td><td>Resources are allocated to their highest-valued uses; production = consumer value at margin.</td></tr>
+      <tr><td><strong>Bandwagon effect</strong></td><td>Positive network externality — demand rises because everyone else has the good.</td></tr>
+      <tr><td><strong>Ceteris paribus</strong></td><td>Latin: "all other things being equal/constant." Used to isolate one variable's effect.</td></tr>
+      <tr><td><strong>Complement</strong></td><td>A good consumed together with another. Rise in price of complement → fall in demand for related good.</td></tr>
+      <tr><td><strong>Contraction of demand</strong></td><td>Movement up-left along demand curve due to a price rise.</td></tr>
+      <tr><td><strong>Contraction of supply</strong></td><td>Movement down-left along supply curve due to a price fall.</td></tr>
+      <tr><td><strong>Derived demand</strong></td><td>Demand for a factor of production (like labour) that exists only because it helps produce goods/services consumers want.</td></tr>
+      <tr><td><strong>Discouraged worker</strong></td><td>Someone who has given up looking for work; classified as "not in the labour force."</td></tr>
+      <tr><td><strong>Elasticity (price)</strong></td><td>Responsiveness of quantity demanded or supplied to a change in price.</td></tr>
+      <tr><td><strong>Employed</strong></td><td>Working at least one hour per week (ABS definition).</td></tr>
+      <tr><td><strong>Equilibrium</strong></td><td>State where Qd = Qs; market clears; no tendency for price to change.</td></tr>
+      <tr><td><strong>Excess demand</strong></td><td>Qd &gt; Qs at a given price; upward pressure on price (shortage).</td></tr>
+      <tr><td><strong>Excess supply</strong></td><td>Qs &gt; Qd at a given price; downward pressure on price (surplus).</td></tr>
+      <tr><td><strong>Expansion of demand</strong></td><td>Movement down-right along demand curve due to a price fall.</td></tr>
+      <tr><td><strong>Expansion of supply</strong></td><td>Movement up-right along supply curve due to a price rise.</td></tr>
+      <tr><td><strong>Externality</strong></td><td>Cost or benefit affecting parties not directly involved in a transaction.</td></tr>
+      <tr><td><strong>Factor market</strong></td><td>A market for inputs to production: land, labour, capital, enterprise.</td></tr>
+      <tr><td><strong>Geographical mobility</strong></td><td>Ability of workers to relocate between regions for work.</td></tr>
+      <tr><td><strong>Human capital</strong></td><td>Workers' accumulated knowledge, skills, training, and experience.</td></tr>
+      <tr><td><strong>Labour force (workforce)</strong></td><td>All employed + unemployed persons aged 15+ who are working or actively seeking work.</td></tr>
+      <tr><td><strong>Labour market</strong></td><td>Where workers and employers interact to determine wages and employment.</td></tr>
+      <tr><td><strong>Labour productivity</strong></td><td>Output per unit of labour input; key driver of long-run economic growth.</td></tr>
+      <tr><td><strong>Law of demand</strong></td><td>As price rises, quantity demanded falls (inverse relationship), ceteris paribus.</td></tr>
+      <tr><td><strong>Law of supply</strong></td><td>As price rises, quantity supplied rises (positive relationship), ceteris paribus.</td></tr>
+      <tr><td><strong>Market demand</strong></td><td>Total demand by all consumers for a good/service at various prices.</td></tr>
+      <tr><td><strong>Market failure</strong></td><td>Price mechanism fails to achieve socially optimal outcome; externalities, public goods.</td></tr>
+      <tr><td><strong>Merit good</strong></td><td>Good underproduced by markets because individual demand undervalues social benefits (e.g. education, healthcare).</td></tr>
+      <tr><td><strong>Monopoly</strong></td><td>Market with one seller, no close substitutes, high barriers to entry. Firm is price-setter.</td></tr>
+      <tr><td><strong>Natural increase</strong></td><td>Excess of births over deaths in a population in one year.</td></tr>
+      <tr><td><strong>Net migration</strong></td><td>Excess of permanent arrivals over permanent departures in one year.</td></tr>
+      <tr><td><strong>Normal good</strong></td><td>Good for which demand rises as consumer income increases.</td></tr>
+      <tr><td><strong>Occupational mobility</strong></td><td>Ability of workers to switch between different types of jobs/occupations.</td></tr>
+      <tr><td><strong>Participation rate</strong></td><td>% of working-age population (15+) who are in the labour force.</td></tr>
+      <tr><td><strong>Price ceiling</strong></td><td>Maximum price set by government below equilibrium → shortage.</td></tr>
+      <tr><td><strong>Price floor</strong></td><td>Minimum price set by government above equilibrium → surplus.</td></tr>
+      <tr><td><strong>Price mechanism</strong></td><td>The process by which supply and demand interact to set market prices.</td></tr>
+      <tr><td><strong>Product differentiation</strong></td><td>Firms making their goods appear different from competitors' (packaging, branding, quality).</td></tr>
+      <tr><td><strong>Public good</strong></td><td>Non-excludable and non-rival good that markets won't provide (e.g. national defence).</td></tr>
+      <tr><td><strong>Snob effect</strong></td><td>Negative network externality — demand falls as more people own the good.</td></tr>
+      <tr><td><strong>Substitute</strong></td><td>A good that can replace another. Rise in price of substitute → rise in demand for related good.</td></tr>
+      <tr><td><strong>Total outlay method</strong></td><td>Method of measuring PED by observing effect on total revenue when price changes.</td></tr>
+      <tr><td><strong>Unemployed</strong></td><td>Not employed, available for work, AND actively seeking work (all 3 conditions must apply).</td></tr>
+      <tr><td><strong>Unemployment rate</strong></td><td>Unemployed as % of labour force.</td></tr>
+      <tr><td><strong>Working-age population</strong></td><td>All persons aged 15 and over in Australia (potential labour force participants).</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</main><!-- /main-content -->
+</div><!-- /layout -->
+
+<!-- MY NOTES SIDEBAR -->
+<div class="notes-sidebar" id="notesSidebar">
+  <div class="notes-sidebar-header">
+    <h3>📝 My Notes</h3>
+    <button class="notes-close" onclick="toggleNotes()">✕</button>
+  </div>
+  <textarea id="myNotesArea" placeholder="Type your own notes here…&#10;&#10;Tip: Select text in the notes and use the highlight buttons to colour-code key points!&#10;&#10;Your notes are saved automatically as you type."></textarea>
+  <div class="notes-sidebar-footer">
+    <button class="note-action-btn" onclick="clearNotes()">Clear</button>
+    <button class="note-action-btn" onclick="downloadNotes()">Download</button>
+    <button class="note-action-btn primary" onclick="copyNotes()">Copy All</button>
+  </div>
+</div>
+
+<script>
+// ── Highlight system ──
+let currentHL = 'hl-yellow';
+
+function setHL(cls, el) {
+  currentHL = cls;
+  document.querySelectorAll('.hl-swatch').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
+}
+
+document.addEventListener('mouseup', () => {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || !sel.toString().trim()) return;
+  // Only highlight within main content
+  const anchor = sel.anchorNode;
+  const main = document.getElementById('mainContent');
+  if (!main.contains(anchor)) return;
+
+  const range = sel.getRangeAt(0);
+  const span = document.createElement('span');
+  span.className = currentHL;
+  try {
+    range.surroundContents(span);
+  } catch(e) {
+    // Selection spans multiple elements — wrap what we can
+    const docFrag = range.extractContents();
+    span.appendChild(docFrag);
+    range.insertNode(span);
+  }
+  sel.removeAllRanges();
+  saveHighlights();
+});
+
+function clearHighlights() {
+  if (!confirm('Clear all highlights?')) return;
+  document.querySelectorAll('.hl-yellow,.hl-green,.hl-blue,.hl-pink,.hl-orange').forEach(el => {
+    const parent = el.parentNode;
+    while (el.firstChild) parent.insertBefore(el.firstChild, el);
+    parent.removeChild(el);
+  });
+  localStorage.removeItem('econ-highlights');
+}
+
+// Persist highlights via localStorage (serialise just the text positions approximately)
+function saveHighlights() {
+  // Store the innerHTML of main content
+  try {
+    localStorage.setItem('econ-highlights', document.getElementById('mainContent').innerHTML);
+  } catch(e) {}
+}
+
+function loadHighlights() {
+  try {
+    const saved = localStorage.getItem('econ-highlights');
+    if (saved) document.getElementById('mainContent').innerHTML = saved;
+  } catch(e) {}
+}
+
+// ── Notes sidebar ──
+let notesOpen = false;
+
+function toggleNotes() {
+  notesOpen = !notesOpen;
+  document.getElementById('notesSidebar').classList.toggle('open', notesOpen);
+  document.getElementById('layout').classList.toggle('notes-open', notesOpen);
+  document.getElementById('notesToggle').classList.toggle('active', notesOpen);
+}
+
+const notesArea = document.getElementById('myNotesArea');
+notesArea.addEventListener('input', () => {
+  try { localStorage.setItem('econ-notes', notesArea.value); } catch(e) {}
+});
+
+function loadNotes() {
+  try {
+    const saved = localStorage.getItem('econ-notes');
+    if (saved) notesArea.value = saved;
+  } catch(e) {}
+}
+
+function clearNotes() {
+  if (!confirm('Clear all your notes?')) return;
+  notesArea.value = '';
+  try { localStorage.removeItem('econ-notes'); } catch(e) {}
+}
+
+function copyNotes() {
+  navigator.clipboard.writeText(notesArea.value).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy All', 1500);
+  });
+}
+
+function downloadNotes() {
+  const blob = new Blob([notesArea.value], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'economics-notes.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// ── Navigation ──
+let navOpen = true;
+
+function toggleNav() {
+  navOpen = !navOpen;
+  const nav = document.getElementById('sidenav');
+  const main = document.getElementById('mainContent');
+  if (navOpen) {
+    nav.style.transform = '';
+    main.style.marginLeft = '220px';
+  } else {
+    nav.style.transform = 'translateX(-100%)';
+    main.style.marginLeft = '0';
+  }
+}
+
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Update active nav link
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+}
+
+// ── Search ──
+let searchMarks = [];
+
+function searchNotes(query) {
+  // Clear previous
+  searchMarks.forEach(span => {
+    const parent = span.parentNode;
+    if (!parent) return;
+    while (span.firstChild) parent.insertBefore(span.firstChild, span);
+    parent.removeChild(span);
+  });
+  searchMarks = [];
+
+  if (!query || query.length < 2) return;
+
+  const main = document.getElementById('mainContent');
+  const walker = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, null);
+  const nodes = [];
+  let node;
+  while (node = walker.nextNode()) nodes.push(node);
+
+  const regex = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+
+  nodes.forEach(textNode => {
+    const text = textNode.textContent;
+    if (!regex.test(text)) return;
+    regex.lastIndex = 0;
+    const parent = textNode.parentNode;
+    if (parent.classList && parent.classList.contains('search-hl')) return;
+
+    const frag = document.createDocumentFragment();
+    let last = 0, match;
+    while ((match = regex.exec(text)) !== null) {
+      if (match.index > last) frag.appendChild(document.createTextNode(text.slice(last, match.index)));
+      const span = document.createElement('mark');
+      span.className = 'search-hl';
+      span.textContent = match[0];
+      frag.appendChild(span);
+      searchMarks.push(span);
+      last = regex.lastIndex;
+    }
+    if (last < text.length) frag.appendChild(document.createTextNode(text.slice(last)));
+    parent.replaceChild(frag, textNode);
+  });
+
+  if (searchMarks.length > 0) searchMarks[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ── Reading progress bar ──
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop;
+  const total = doc.scrollHeight - doc.clientHeight;
+  const pct = total > 0 ? (scrolled / total) * 100 : 0;
+  document.getElementById('readingBar').style.width = pct + '%';
+
+  // Update active nav based on visible section
+  const sections = document.querySelectorAll('.section[id], .chapter[id]');
+  let currentId = '';
+  sections.forEach(s => {
+    const rect = s.getBoundingClientRect();
+    if (rect.top <= 80) currentId = s.id;
+  });
+  if (currentId) {
+    document.querySelectorAll('.nav-link').forEach(l => {
+      l.classList.toggle('active', l.getAttribute('onclick')?.includes(`'${currentId}'`));
+    });
+  }
+});
+
+// ── Init ──
+loadHighlights();
+loadNotes();
+</script>
+</body>
+</html>
